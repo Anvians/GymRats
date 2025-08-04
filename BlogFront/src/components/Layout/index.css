@@ -1,0 +1,30 @@
+/* Main App Layout */
+.app-layout {
+  display: flex;
+  background-color: #121212; /* Main dark background */
+  color: #f5f5f7;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px; /* Default margin to accommodate the sidebar */
+  transition: margin-left 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* For mobile: Adjust margin when sidebar collapses */
+@media (max-width: 767px) {
+  .main-content {
+    margin-left: 70px; /* Width of the collapsed sidebar */
+    padding: 15px;
+  }
+}
+
+.main-content.panel-active {
+  /* For example, you could dim the background */
+   filter: brightness(0.5);
+}
+
+.app-layout.collapsed {
+    grid-template-columns: 70px 1fr;
+}

@@ -1,0 +1,72 @@
+.recommendation-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: fixed;
+    margin-top: 110px;
+    background-color: #4a5368!important;	
+
+}
+
+.user_dp{
+    width: 30px !important;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-left: -5px;
+ 
+}
+.username{
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: -8px;
+}
+.user_info{
+    display: flex;
+    text-align: start;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: azure;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding-left: 20px;
+    width: 80%;
+}
+.user_info p{
+    font-size: 10px;
+    font-weight: 400;
+    color: #000000;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: -5px;
+    margin-right: 10px;
+    margin-bottom: 3px;
+}
+
+li{
+    list-style: none;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.recommend-typeh1{
+    font-size: 20px;
+    font-weight: 600;
+    color: #848484;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}

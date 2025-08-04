@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Base Styles (Desktop First)
+   ========================================================================== */
+
+/* Full-screen overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px; /* Add some padding for safety */
+  box-sizing: border-box;
+}
+
+/* Main modal container with two panels */
+.modal-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  max-height: 800px;
+  background-color: #121212;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Left Panel: Media */
+.modal-media-panel {
+  flex: 1.5; /* Takes up more space */
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-media-panel img,
+.modal-media-panel video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Right Panel: Comments */
+.modal-comments-panel {
+  flex: 1;
+  min-width: 350px; /* Ensure it doesn't get too squished */
+  display: flex;
+  flex-direction: column;
+  background-color: #1c1c1e;
+  border-left: 1px solid #3a3a3c;
+}
+
+/* Panel Header */
+.panel-header {
+  padding: 16px;
+  border-bottom: 1px solid #3a3a3c;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.header-user-dp {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header-username {
+  font-weight: 600;
+  color: #f5f5f7;
+}
+
+/* Comments List */
+.comments-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  color: #f5f5f7;
+}
+
+.error-message, .no-comments-message {
+    text-align: center;
+    color: #8e8e93;
+    padding-top: 50px;
+}
+.no-comments-message h3 {
+    margin: 0;
+}
+
+/* Comment Input Form */
+.comment-input-form {
+  display: flex;
+  padding: 16px;
+  border-top: 1px solid #3a3a3c;
+  gap: 8px;
+  flex-shrink: 0; /* Prevent form from shrinking */
+}
+
+.comment-input-form input {
+  flex-grow: 1;
+  background: transparent;
+  border: 1px solid #4a4a4c;
+  border-radius: 20px;
+  padding: 10px 15px;
+  color: #f5f5f7;
+  font-size: 0.9rem;
+}
+.comment-input-form input:focus {
+    outline: none;
+    border-color: #0a84ff;
+}
+
+.comment-input-form button {
+  background: transparent;
+  border: none;
+  color: #0a84ff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.comment-input-form button:disabled {
+  color: #8e8e93;
+  cursor: not-allowed;
+}
+
+/* Close button for the modal */
+.close-button {
+    position: fixed; /* Changed to fixed for consistent positioning */
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1001;
+}
+.close-button svg {
+    width: 28px;
+    height: 28px;
+    color: #fff;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+}
+
+
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+
+/* Tablet View: Media panel gets less space */
+@media (max-width: 1024px) {
+  .modal-container {
+    max-height: 700px;
+  }
+  .modal-media-panel {
+    flex: 1.2;
+  }
+  .modal-comments-panel {
+    flex: 1;
+  }
+}
+
+/* Mobile View: Stacked layout */
+@media (max-width: 767px) {
+  .modal-overlay {
+    /* Remove padding to allow full screen on mobile */
+    padding: 0; 
+  }
+
+  .modal-container {
+    /* Modal takes up the entire screen */
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    flex-direction: column; /* This is the key change */
+  }
+
+  /* We hide the media panel on mobile to save space */
+  .modal-media-panel {
+    display: none;
+  }
+
+  /* The comments panel now takes up the full screen */
+  .modal-comments-panel {
+    min-width: 100%;
+    border-left: none; /* No border needed anymore */
+  }
+
+  /* Move the close button inside the scrollable area */
+  .close-button {
+    /* This button now "belongs" to the comments panel header */
+    position: absolute; /* Relative to the panel-header */
+    top: 16px;
+    right: 16px;
+  }
+
+  .close-button svg {
+    width: 24px;
+    height: 24px;
+    color: #8e8e93; /* Change color to fit with the header */
+    filter: none;
+  }
+
+  .panel-header {
+    position: relative; /* Needed for absolute positioning of close button */
+  }
+}

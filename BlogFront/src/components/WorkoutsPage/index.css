@@ -1,0 +1,137 @@
+/* Workouts.css */
+.workouts-page-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    padding-left: 100px !important;
+}
+
+.workouts-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.workouts-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.filters-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background-color: #1c1c1e;
+    border-radius: 12px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: #8e8e93;
+}
+
+.filter-group select {
+    background-color: #2c2c2e;
+    color: #fff;
+    border: 1px solid #3a3a3c;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.routines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.routine-card {
+    background-color: #1c1c1e;
+    border: 1px solid #3a3a3c;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease-in-out;
+}
+
+.routine-card:hover {
+    transform: translateY(-5px);
+    border-color: #0a84ff;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    margin: 0 0 12px 0;
+    color: #fff;
+}
+
+.card-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #ffcc00;
+    font-weight: 600;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: #8e8e93;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    flex-grow: 1;
+}
+
+.card-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.tag {
+    background-color: #3a3a3c;
+    color: #e0e0e0;
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.tag.level-beginner {
+    background-color: #32d74b;
+    color: #000;
+}
+
+.tag.level-intermediate {
+    background-color: #ff9f0a;
+    color: #000;
+}
+
+.tag.level-advanced {
+    background-color: #ff453a;
+    color: #fff;
+}
+
+.start-workout-btn {
+    padding: 12px;
+    background-color: #0a84ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: auto;
+}

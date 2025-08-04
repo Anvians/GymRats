@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Profile Page: Main Container & Error State
+   ========================================================================== */
+.profile-page-container {
+  max-width: 950px;
+  margin: 20px auto;
+  padding: 0 20px;
+  color: #f5f5f7;
+}
+
+.profile-error-container {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 1.5rem;
+  color: #8e8e93;
+}
+
+/* ==========================================================================
+   REFINED: Story Highlights Section
+   ========================================================================== */
+.story-highlights {
+  display: flex;
+  gap: 25px; /* More space */
+  padding: 25px 0;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.highlight-circle {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: #2c2c2e;
+  border: 2px solid #3a3a3c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s ease-in-out;
+}
+.highlight-circle:hover {
+  transform: scale(1.05);
+}
+
+.highlight-circle p { /* The text inside the circle */
+  margin: 0;
+  white-space: nowrap;
+}
+
+.highlight-circle.add-new {
+  font-size: 2.5rem;
+  color: #8e8e93;
+  border-style: dashed;
+}
+.highlight-circle.add-new:hover {
+  color: #fff;
+  border-color: #fff;
+}

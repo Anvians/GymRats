@@ -1,0 +1,170 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #121212;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  padding: 20px;
+}
+
+.login-panel {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  min-height: 550px;
+  background-color: #1c1c1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Left Side: Branding */
+.branding-section {
+  flex: 1;
+  background: rgb(13, 59, 56) !important;
+  color: #fff;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.branding-section .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  
+  margin-bottom: 20px;
+}
+
+.branding-section h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.branding-section h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.branding-section p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Right Side: Form */
+.form-section {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #1c1c1e;
+  color: #f5f5f7;
+}
+
+.form-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+
+.input-group {
+  position: relative;
+  margin-bottom: 15px;
+  width: 84% !important;
+}
+
+.input-icon {
+  margin-top: -7px;
+}
+
+.input-group input {
+  width: 93% ;
+  padding: 15px 15px 15px 45px; /* Add extra padding on the left (45px) to make space for the icon */
+  background-color: #2c2c2e;
+  border: 1px solid #3a3a3c;
+  border-radius: 8px;
+  color: #f5f5f7;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #0a84ff;
+}
+
+.error-message {
+  color: #ff453a;
+  background-color: rgba(255, 69, 58, 0.1);
+  border: 1px solid #ff453a;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+
+.login-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #0a84ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.login-button:hover:not(:disabled) {
+  background-color: #339aff;
+}
+
+.login-button:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.login-button:disabled {
+  background-color: #8e8e93;
+  cursor: not-allowed;
+}
+
+.form-footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8e8e93;
+}
+
+.form-footer a {
+  color: #0a84ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .login-panel {
+    flex-direction: column;
+  }
+  .branding-section {
+    display: none; /* Hide the branding section on small screens to save space */
+  }
+  .form-section {
+    padding: 40px 20px;
+  }
+}

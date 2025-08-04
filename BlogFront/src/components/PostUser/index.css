@@ -1,0 +1,132 @@
+html, body {
+    margin: 0;
+    
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fbfbfb;
+
+}
+.background_color{
+    background-color: #112632;
+    background-size: cover;
+    height: 100vh;
+}
+.chart-container {
+    display: flex;
+    
+}
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.left_section {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.right_section {
+    flex: 1;
+}
+.profile-image{
+    margin-top: 1rem;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.img-name h2{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: -10px;
+    color: #3c5d6f;
+}
+.user-email-username{
+    color: #80939e;
+}
+
+.dp-image{
+    width: 100px;
+    height: 100px;
+}
+
+.user-profile{
+
+    height: 100vh;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: #112632;
+}
+
+
+.tabs-container {
+    width: 100%;
+    color: #16181a;
+    
+    
+    background-size: cover;
+    background-color: #f0f0f0;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;  /* Center tabs horizontally */
+    align-items: center;
+    gap: 10px;  /* Controls spacing between tabs */
+    width: auto;  /* Make the container shrink to fit content */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0; /* Optional background */
+}
+
+  
+  .tabs button {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .tabs button.active {
+    font-weight: bold;
+    color: rgb(24, 23, 23);
+    
+    border-radius: 5px;
+  }
+  
+  .tab-content {
+    padding: 20px;
+    border: 1px solid #ddd;
+    
+    border-radius: 5px;
+    background: white;
+  }
+.following-class{
+    cursor: pointer;
+}
+.follower-class{
+    cursor: pointer;
+}
+.following-followers{
+    display: flex;
+    justify-content: center;
+}
+.following-followers p{
+    margin: 10px;
+    margin-bottom: 20px;
+    color: #3c5d6f;
+}
+.horizontal-line{
+    margin-bottom: 30px;
+}

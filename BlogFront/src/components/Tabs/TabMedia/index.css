@@ -1,0 +1,23 @@
+.media-image{
+    height: 300px;
+    width: 300px;
+    
+}
+.post-content{
+    width: 100% !important;
+    background-color: #464e62;
+    margin: 5px;
+    
+}
+
+.post-tab-content{
+    background-color:#464e62;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    
+}
+.post-tab-content > * {
+    height: 100%; /* Adjust as needed */
+}

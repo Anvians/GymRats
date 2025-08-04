@@ -1,0 +1,248 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #1c1c1e;
+  border-right: 1px solid #3a3a3c;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 25px;
+  padding-right: 40px;
+  transition: width 0.3s ease-in-out;
+  margin-right: 20px;
+  overflow-x: hidden;
+  transition: width 0.3s ease;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 30px 10px;
+  color: #0a84ff; /* A bright accent color for the logo */
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  white-space: nowrap; /* Prevent text from wrapping during transition */
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-item, .search-button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 10px;
+  border-radius: 8px;
+  color: #e0e0e0;
+  text-decoration: none;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 1rem;
+}
+
+.nav-item:hover, .search-button:hover {
+  background-color: #3a3a3c;
+  color: #fff;
+}
+
+.nav-item.active {
+  background-color: #0a84ff;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Styles for collapsed sidebar on mobile */
+@media (max-width: 767px) {
+  .sidebar {
+    width: 70px;
+    padding: 20px 0;
+    align-items: center;
+  }
+
+  .sidebar-header {
+    justify-content: center;
+  }
+
+  .logo-text {
+    display: none; /* Hide text on mobile */
+  }
+
+  .nav-label {
+    display: none; /* Hide text on mobile */
+  }
+
+  .nav-item, .search-button {
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    gap: 0;
+  }
+}
+/* Add to Sidebar.css */
+/* For the notification badge on the icon */
+/* Add this to Sidebar.css, replacing the old notification styles */
+
+/* Container for the notification button and panel */
+/* Ensure the container positions the panel relative to the bell icon */
+.notification-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Pop-over panel */
+.notification-panel {
+  position: absolute;
+  top: 100%; /* Below the button */
+  right: 0; /* Align right to the container */
+  margin-top: 10px;
+  width: 360px;
+  max-height: 500px;
+  background-color: #242526;
+  border: 1px solid #3a3a3c;
+  border-radius: 12px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Optional: Remove if you don’t want the arrow */
+.notification-panel::before {
+  display: none;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* NEW: The little arrow pointing to the button */
+.notification-panel::before {
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    background-color: #242526;
+    border-bottom: 1px solid #3a3a3c;
+    border-left: 1px solid #3a3a3c;
+    transform: rotate(45deg);
+}
+
+
+.notification-header {
+    padding: 16px 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 1px solid #3a3a3c;
+    flex-shrink: 0;
+}
+
+.notification-list {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid #3a3a3c;
+    transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+    background-color: #3a3a3c;
+}
+
+.notification-item.unread {
+    background-color: #2c2c2e;
+}
+.notification-item.unread p {
+    font-weight: 600;
+}
+
+.notification-item img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.notification-item p {
+    margin: 0;
+    flex-grow: 1;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.notification-item .post-thumbnail {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.no-notifications {
+    text-align: center;
+    padding: 40px;
+    color: #8e8e93;
+}
+/* Add these styles to your Sidebar.css file */
+.sidebar.collapsed .nav-label,
+.sidebar.collapsed .logo-text {
+  display: none; /* Hide text when collapsed */
+}
+
+.sidebar.collapsed {
+  width: 70px; /* The collapsed width */
+  padding: 20px 0;
+  align-items: center;
+}
+
+.sidebar.collapsed .nav-item,
+.sidebar.collapsed .signout-button {
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    gap: 0;
+}
+.button-item {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: var(--text-secondary); /* adjust as needed */
+}
+
+.button-item:hover {
+  background-color: var(--bg-hover); /* adjust as needed */
+  color: var(--text-primary); /* adjust as needed */
+}
