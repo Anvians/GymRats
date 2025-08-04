@@ -1,0 +1,11 @@
+# Ignore environment and build files
+.env
+.env.* 
+/node_modules
+/build
+/uploads/
+*.log
+
+# Mac and Windows system files
+.DS_Store
+Thumbs.db
