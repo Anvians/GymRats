@@ -24,7 +24,7 @@ const EditProfile = () => {
         const fetchUserData = async () => {
             try {
                 const token = Cookies.get('auth_token');
-                const response = await axios.get('http://localhost:5000/api/auth/me', {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/me`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 const { firstname, lastname, bio, dp } = response.data;
@@ -64,7 +64,7 @@ const EditProfile = () => {
 
         try {
             const token = Cookies.get('auth_token');
-            await axios.put('http://localhost:5000/api/users/profile/edit', updatePayload, {
+            await axios.put(`${process.env.REACT_APP_API_URL}/api/users/profile/edit`, updatePayload, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`,

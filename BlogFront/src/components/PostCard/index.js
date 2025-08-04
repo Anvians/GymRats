@@ -37,7 +37,7 @@ console.log('debugging the post', post)
 
     try {
       await axios.post(
-        "http://localhost:5000/like",
+        `${process.env.REACT_APP_API_URL}/like`,
         { postId: post._id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

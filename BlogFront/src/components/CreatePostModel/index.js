@@ -25,7 +25,7 @@ const CreatePostModal = ({ closeModal }) => {
     useEffect(() => {
         const fetchTagSuggestions = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/posts/tags");
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts/tags`);
                 setSuggestions(response.data.map(tag => ({ value: tag, label: tag })));
             } catch (error) { console.error("Error fetching tag suggestions:", error); }
         };
@@ -55,7 +55,7 @@ const CreatePostModal = ({ closeModal }) => {
         formData.append("tags", JSON.stringify(tags.map(t => t.value)));
         try {
             const token = Cookies.get("auth_token");
-            await axios.post("http://localhost:5000/api/posts", formData, {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/posts`, formData, {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${token}` },
                 onUploadProgress: (progressEvent) => {
                     const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);

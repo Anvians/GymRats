@@ -42,7 +42,7 @@ const MessagingPage = () => {
 
         const headers = { headers: { Authorization: `Bearer ${token}` } };
 
-        axios.get('http://localhost:5000/api/conversations', headers)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/conversations`, headers)
             .then(res => {
                 const fetchedConversations = res.data.conversations;
                 setConversations(fetchedConversations);
@@ -57,7 +57,7 @@ const MessagingPage = () => {
 
         // Stories fetch logic... (omitted for brevity, no changes needed)
 
-        socketRef.current = io("http://localhost:5000", {
+        socketRef.current = io(`${process.env.REACT_APP_API_URL}`, {
             auth: { token }
         });
 
@@ -97,7 +97,7 @@ const MessagingPage = () => {
         setActiveConversation(convo);
         const token = Cookies.get("auth_token");
         try {
-            const res = await axios.get(`http://localhost:5000/api/conversations/${convo._id}/messages`, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/conversations/${convo._id}/messages`, { headers: { Authorization: `Bearer ${token}` } });
             setMessages(res.data.messages);
         } catch (err) {
             console.error("Failed to fetch messages:", err);

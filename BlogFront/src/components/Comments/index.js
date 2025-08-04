@@ -38,7 +38,7 @@ const Comments = ({ closeModal, post_data }) => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:5000/comments/${post_data._id}`, {
+        `${process.env.REACT_APP_API_URL}/comments/${post_data._id}`, {
           headers: { Authorization: `Bearer ${token}` }
         }
       );

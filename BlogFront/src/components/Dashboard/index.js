@@ -20,7 +20,7 @@ const Dashboard = () => {
       try {
         const token = Cookies.get("auth_token");
         const response = await axios.get(
-          "http://localhost:5000/api/users/dashboard",
+          `${process.env.REACT_APP_API_URL}/api/users/dashboard`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

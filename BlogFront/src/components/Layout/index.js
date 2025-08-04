@@ -46,7 +46,7 @@ useEffect(() => {
         const fetchNotifications = async () => {
             const token = Cookies.get("auth_token");
             try {
-                const res = await axios.get("http://localhost:5000/api/notifications", {
+                const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/notifications`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setNotifications(res.data.notifications);
@@ -67,7 +67,7 @@ useEffect(() => {
         if (unreadCount > 0) {
             try {
                 const token = Cookies.get("auth_token");
-                await axios.post("http://localhost:5000/api/notifications/read", {}, {
+                await axios.post(`${process.env.REACT_APP_API_URL}/api/notifications/read`, {}, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUnreadCount(0);

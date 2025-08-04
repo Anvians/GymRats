@@ -140,7 +140,13 @@ io.on('connection', (socket) => {
 });
 
 // 6. Core Middleware & Routes (omitted for brevity, no changes needed)
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({
+    origin: [process.env.CLIENT_URL, "http://localhost:3000"],
+    credentials: true,
+  })
+);
+
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

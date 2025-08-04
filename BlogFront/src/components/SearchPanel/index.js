@@ -40,7 +40,7 @@ const SearchPanel = ({ isOpen, onClose }) => {
     console.log("Token for search:", token); // Log the token to verify it's being passed correctly
     // --- CHANGE THESE LINES ---
     const response = await axios.get(
-      `http://localhost:5000/api/users/search?q=${searchTerm}`, // Use GET with a query parameter
+      `${process.env.REACT_APP_API_URL}/api/users/search?q=${searchTerm}`, // Use GET with a query parameter
       { headers: { Authorization: `Bearer ${token}` } }
     );
 

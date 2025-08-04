@@ -24,7 +24,7 @@ const SearchedUser = () => {
 
     try {
       console.log("Fetching user data...");
-      const response = await fetch("http://localhost:5000/media", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/media`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const SearchedUser = () => {
 
     try {
       console.log("Following user...");
-      const response = await fetch("http://localhost:5000/follow", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/follow`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const SearchedUser = () => {
     const token = Cookies.get('auth_token');
     
     // Ensure the Authorization header includes a space between 'Bearer' and the token
-    const request = await fetch(`http://localhost:5000/following/check/${userList._id}`, {
+    const request = await fetch(`${process.env.REACT_APP_API_URL}/following/check/${userList._id}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`  // Note the space after 'Bearer'
@@ -97,7 +97,7 @@ const SearchedUser = () => {
 
     const token = Cookies.get('auth_token')
     try{
-    const response = await fetch('http://localhost:5000/unfollow', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/unfollow`, {
       method : 'POST',
       headers:{
         "Content-Type" : "application/json",

@@ -16,7 +16,7 @@ const SinglePost = () => {
         const fetchPost = async () => {
             try {
                 const token = Cookies.get('auth_token');
-                const response = await axios.get(`http://localhost:5000/api/posts/${postId}`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setPost(response.data.post);
@@ -36,7 +36,7 @@ const SinglePost = () => {
 
         try {
             const token = Cookies.get('auth_token');
-            const response = await axios.post(`http://localhost:5000/api/posts/${postId}/comments`, 
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/posts/${postId}/comments`, 
                 { text: newComment },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

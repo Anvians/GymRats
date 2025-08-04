@@ -30,7 +30,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       if (!token) return;
       try {
-        const res = await fetch(`http://localhost:5000/user/${username}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/user/${username}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ const Profile = () => {
     const getFollowing = async () => {
       if (!token || !userId) return;
       try {
-        const res = await axios.get("http://localhost:5000/postfollowing", {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/postfollowing`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { userId },
         });
@@ -85,7 +85,7 @@ const Profile = () => {
       if (!username || !token) return;
       try {
         const res = await axios.get(
-          `http://localhost:5000/searchedfollowers/${username}`,
+          `${process.env.REACT_APP_API_URL}/searchedfollowers/${username}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -107,7 +107,7 @@ const Profile = () => {
       if (!searchedId || !token) return;
       try {
         const res = await axios.get(
-          `http://localhost:5000/followers/${searchedId}`,
+          `${process.env.REACT_APP_API_URL}/followers/${searchedId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -132,7 +132,7 @@ const Profile = () => {
       if (!userList || !token) return;
       try {
         const res = await fetch(
-          `http://localhost:5000/following/check/${userList._id}`,
+          `${process.env.REACT_APP_API_URL}/following/check/${userList._id}`,
           {
             method: "GET",
             headers: {
@@ -154,7 +154,7 @@ const Profile = () => {
   const followUser = async () => {
     if (!token || !userList) return;
     try {
-      const res = await fetch("http://localhost:5000/follow", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/follow`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -175,7 +175,7 @@ const Profile = () => {
   const unfollow = async () => {
     if (!token || !userList) return;
     try {
-      const res = await fetch("http://localhost:5000/unfollow", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/unfollow`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

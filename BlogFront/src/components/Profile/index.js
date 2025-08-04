@@ -30,7 +30,7 @@ const Profile = () => {
     // If there's no username in the URL, we're at /profile, so use the special 'me' endpoint.
     // Otherwise, use the username from the URL.
     const profileToFetch = username || 'me';
-    const endpoint = `http://localhost:5000/api/users/profile/${profileToFetch}`;
+    const endpoint = `${process.env.REACT_APP_API_URL}/api/users/profile/${profileToFetch}`;
 
     try {
         const response = await axios.get(endpoint, {
@@ -67,7 +67,7 @@ console.log('profile_data', profile);
         try {
           const token = Cookies.get("auth_token");
           const response = await axios.get(
-            "http://localhost:5000/api/users/me/saved",
+            `${process.env.REACT_APP_API_URL}/api/users/me/saved`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

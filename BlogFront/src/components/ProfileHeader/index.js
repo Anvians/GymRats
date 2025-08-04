@@ -30,7 +30,7 @@ const ProfileHeader = ({ profile, isOwnProfile, onFollowersClick, onFollowingCli
 
     try {
       await axios.post(
-        `http://localhost:5000/api/users${endpoint}`,
+        `${process.env.REACT_APP_API_URL}/api/users${endpoint}`,
         { followingId: profile._id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -49,7 +49,7 @@ const ProfileHeader = ({ profile, isOwnProfile, onFollowersClick, onFollowingCli
     try {
       const token = Cookies.get("auth_token");
       const response = await axios.post(
-        "http://localhost:5000/api/conversations/findOrCreate",
+        `${process.env.REACT_APP_API_URL}/api/conversations/findOrCreate`,
         { otherUserId: profile._id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

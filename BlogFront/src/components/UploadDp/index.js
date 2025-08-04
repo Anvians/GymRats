@@ -43,7 +43,7 @@ const UploadModal = ({ closeModal, onUploadSuccess }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/upload_dp", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/upload_dp`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
