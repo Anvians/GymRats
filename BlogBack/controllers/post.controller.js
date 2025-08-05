@@ -11,9 +11,6 @@ const Post = require('../models/post.model');
 // @route   POST /api/posts
 // Filename: controllers/post.controller.js
 
-// Make sure you have these at the top of the file:
-const cloudinary = require('cloudinary').v2;
-const fs = require('fs');
 
 // ... (your other controller functions) ...
 
