@@ -1,12 +1,11 @@
 // controllers/post.controller.js
-const Post = require('../models/post.model');
 const Following = require('../models/following.model');
 const { User } = require('../models/user.model');
 const Notification = require('../models/notification.model'); // 1. Import at the top
 const SavedPost = require('../models/savedPost.model'); // Import the new model
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
-const Post = require('../models/post.model'); // Make sure the path to your model is correct
+const Post = require('../models/post.model'); 
 
 // @desc    Create a new post
 // @route   POST /api/posts
