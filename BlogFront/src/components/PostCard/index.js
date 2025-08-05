@@ -19,7 +19,6 @@ const PostCard = ({
 }) => {
   const [showComments, setShowComments] = useState(false);
 
-console.log('debugging the post', post)
 
   // A more robust check for whether the current user has liked the post
   const isLiked = post.likes.includes(currentUser?._id);
@@ -37,7 +36,7 @@ console.log('debugging the post', post)
 
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_URL}/like`,
+        `${process.env.REACT_APP_API_URL}/${post._id}/like`,
         { postId: post._id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

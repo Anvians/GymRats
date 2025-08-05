@@ -34,10 +34,12 @@ const Home = () => {
         const fetchFeed = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts/feed?page=${page}&limit=10`, {
+                const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+                const response = await axios.get(`${baseURL}/api/posts/feed?page=${page}&limit=10`, {
                     headers: { Authorization: `Bearer ${token}` },
                     signal: controller.signal, // Pass the signal to the request
-                });
+                });                                                                                         
 
                 if (response.data.success) {
                     setUserData(response.data.user);
