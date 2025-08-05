@@ -13,7 +13,10 @@ const {
 
 } = require('../controllers/post.controller');
 const { authenticateToken } = require('../middleware/auth.middleware');
-const upload = require('../middleware/upload.middleware');
+const multer = require('multer'); // <-- Import multer
+
+// Configure multer here
+const upload = multer({ dest: 'uploads/' });
 
 // Note: Using router.route() can group handlers for the same path
 router.route('/')

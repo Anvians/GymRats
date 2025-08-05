@@ -4,33 +4,65 @@ const Following = require('../models/following.model');
 const { User } = require('../models/user.model');
 const Notification = require('../models/notification.model'); // 1. Import at the top
 const SavedPost = require('../models/savedPost.model'); // Import the new model
-
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
+const Post = require('../models/post.model'); // Make sure the path to your model is correct
 
 // @desc    Create a new post
 // @route   POST /api/posts
+// Filename: controllers/post.controller.js
+
+// Make sure you have these at the top of the file:
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
+
+// ... (your other controller functions) ...
+
+// REPLACE your old createPost function with THIS ONE:
 const createPost = async (req, res, next) => {
-    const { caption, tags } = req.body;
+  // Check if a file was uploaded by multer
+  if (!req.file) {
+    // It's better to return a JSON response for API errors
+    return res.status(400).json({ message: "Please upload a media file." });
+  }
 
-    try {
-        if (!req.file) {
-            res.status(400);
-            throw new Error('Media file is required');
-        }
+  try {
+    // 1. Upload the file to Cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'gymrats_posts',
+      resource_type: 'auto'
+    });
 
-        const mediaUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+    // 2. Delete the temporary file from your server
+    fs.unlinkSync(req.file.path);
 
-        const post = await Post.create({
-            user: req.user.id,
-            caption,
-            mediaUrl,
-            tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
-        });
+    // 3. Get data from the request and Cloudinary
+    const { caption, privacy, tags } = req.body;
+    const mediaUrl = result.secure_url;
+    const mediaPublicId = result.public_id;
 
-        res.status(201).json(post);
-    } catch (error) {
-        next(error);
-    }
+    // 4. Create the new post in your database
+    const newPost = new Post({
+      caption,
+      privacy, // You'll need to add this to your Post model if it's not there
+      tags: tags ? JSON.parse(tags) : [], // From your frontend, you stringify the tags
+      mediaUrl: mediaUrl,
+      mediaPublicId: mediaPublicId,
+      user: req.user.id // Your old code used 'user', so I've kept that.
+    });
+
+    await newPost.save();
+
+    // 5. Send the successful post back to the frontend
+    res.status(201).json(newPost);
+
+  } catch (error) {
+    // If an error occurs, pass it to your central error handler
+    next(error);
+  }
 };
+
+
 
 // @desc    Get home feed posts from users the current user follows
 // @route   GET /api/posts/feed

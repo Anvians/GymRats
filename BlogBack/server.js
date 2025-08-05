@@ -6,6 +6,9 @@ require("dotenv").config();
 const path = require('path');
 const http = require('http');
 const { Server } = require("socket.io");
+// const cloudinary = require('cloudinary').v2;
+// const multer = require('multer');
+// const fs = require('fs'); // Node.js File System module for deleting files
 const jwt = require('jsonwebtoken');
 
 // 2. Local Imports
@@ -32,9 +35,10 @@ const app = express();
 connectDB();
 
 const server = http.createServer(app);
+// Corrected Socket.io CORS Configuration
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: [process.env.CLIENT_URL, "http://localhost:3000"],
         methods: ["GET", "POST"]
     }
 });
@@ -147,11 +151,62 @@ app.use(
   })
 );
 
+// const upload = multer({ dest: 'uploads/' });
+
+
+// app.post('/api/posts/create', upload.single('postImage'), async (req, res) => {
+//   console.log('Request body:', req.body);
+//   console.log('Request file:', req.file);
+
+//   if (!req.file) {
+//     return res.status(400).json({ message: "No file uploaded." });
+//   }
+
+//   try {
+//     // Upload the file from the temporary path to Cloudinary
+//     const result = await cloudinary.uploader.upload(req.file.path, {
+//       folder: 'gymrats_posts', // Optional: saves to a specific folder in Cloudinary
+//     });
+
+//     // IMPORTANT: Clean up the temporary file from the 'uploads' folder
+//     fs.unlinkSync(req.file.path);
+
+//     // Now you have the secure URL from Cloudinary
+//     const imageUrl = result.secure_url;
+    
+//     // --- DATABASE LOGIC ---
+//     // Here, you would save the new post to your MongoDB database
+//     // For example:
+//     // const newPost = new Post({
+//     //   title: req.body.title,
+//     //   content: req.body.content,
+//     //   imageUrl: imageUrl, // Save the Cloudinary URL
+//     //   author: req.user.id // Assuming you have user auth middleware
+//     // });
+//     // await newPost.save();
+
+//     console.log('File uploaded to Cloudinary:', imageUrl);
+
+//     // Send a success response back to the client
+//     res.status(201).json({ 
+//       message: "Post created successfully!",
+//       imageUrl: imageUrl, // Send the URL back to the frontend
+//       // post: newPost // You might send the full new post object
+//     });
+
+//   } catch (error) {
+//     console.error("Error uploading file:", error);
+//     res.status(500).json({ message: "Error uploading file to Cloudinary." });
+//   }
+// });
+
+
+
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
