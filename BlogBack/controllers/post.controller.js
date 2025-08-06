@@ -107,47 +107,104 @@ const getFeedPosts = async (req, res, next) => {
 // @desc    Like or unlike a post
 // @route   POST /api/posts/:postId/like
 const likeUnlikePost = async (req, res, next) => {
+    console.log('like button triggered');
     try {
         const post = await Post.findById(req.params.postId);
-        // ... find post logic ...
 
-        if (post.likes.includes(req.user.id)) {
-            // Unliking, so we don't create a notification
-            post.likes = post.likes.filter(/* ... */);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        const userId = req.user.id;
+
+        if (post.likes.includes(userId)) {
+            // Unliking
+            post.likes = post.likes.filter(id => id.toString() !== userId.toString());
         } else {
-            // 2. Liking, so create a notification
-            post.likes.push(req.user.id);
-            // Don't notify if a user likes their own post
-            if (post.user.toString() !== req.user.id.toString()) {
+            // Liking
+            post.likes.push(userId);
+
+            if (post.user.toString() !== userId.toString()) {
                 await Notification.create({
                     recipient: post.user,
-                    sender: req.user.id,
+                    sender: userId,
                     type: 'like',
                     post: post._id,
                 });
             }
         }
+
         await post.save();
-        res.status(200).json(post.likes);
+        res.status(200).json({ likes: post.likes });
+
     } catch (error) {
+        console.error('Like/unlike error:', error); // Log for debugging
         next(error);
     }
 };
 
+
+
+// @desc    Get all comments for a post
+// @route   GET /api/posts/:postId/comments
+const getPostComments = async (req, res, next) => {
+    try {
+        console.log('--- Backend: getPostComments Triggered ---');
+        const postId = req.params.postId;
+        console.log('Backend received request for postId:', postId);
+
+        // Check if the ID format is valid before querying
+        if (!mongoose.Types.ObjectId.isValid(postId)) {
+            console.log('Error: The Post ID format is invalid.');
+            return res.status(400).json({ success: false, message: 'Invalid Post ID format' });
+        }
+
+        console.log('Querying database for post...');
+        const post = await Post.findById(postId);
+
+        // This is the most important log. Check if 'post' is null or an object.
+        console.log('Database query result:', post);
+
+        if (!post) {
+            console.log('Conclusion: Post NOT found in the database.');
+            return res.status(404).json({ success: false, message: 'Post not found' });
+        }
+        
+        // If the post is found, populate and send comments
+        await post.populate('comments.user', 'username dp');
+        console.log('Conclusion: Post found. Sending comments.');
+        res.status(200).json({ success: true, comments: post.comments });
+
+    } catch (error) {
+        console.error("--- Backend Error in getPostComments ---:", error);
+        next(error);
+    }
+};
+
+
 // @desc    Add a comment to a post
 // @route   POST /api/posts/:postId/comments
 const addCommentToPost = async (req, res, next) => {
-    const { text } = req.body;
     try {
-        if (!text) {
-            res.status(400);
-            throw new Error('Comment text is required');
+        console.log('--- Backend: addCommentToPost Triggered ---');
+        const { text } = req.body;
+        const postId = req.params.postId;
+        console.log('Backend received request for postId:', postId);
+        console.log('Comment Text:', text);
+        // Also log the user attached by your auth middleware to ensure it's working
+        console.log('User from token:', req.user);
+
+        if (!mongoose.Types.ObjectId.isValid(postId)) {
+            console.log('Error: The Post ID format is invalid.');
+            return res.status(400).json({ success: false, message: 'Invalid Post ID format' });
         }
 
-        const post = await Post.findById(req.params.postId);
+        const post = await Post.findById(postId);
+        console.log('Database query result:', post);
+
         if (!post) {
-            res.status(404);
-            throw new Error('Post not found');
+            console.log('Conclusion: Post NOT found. Cannot add comment.');
+            return res.status(404).json({ success: false, message: 'Post not found' });
         }
 
         const comment = {
@@ -157,36 +214,20 @@ const addCommentToPost = async (req, res, next) => {
 
         post.comments.push(comment);
         await post.save();
-        
-        // Populate the new comment with user info before sending back
+
         const newComment = post.comments[post.comments.length - 1];
         await Post.populate(newComment, { path: 'user', select: 'username dp' });
-
-        res.status(201).json(newComment);
-
-    } catch (error) {
-        next(error);
-    }
-};
-
-// @desc    Get all comments for a post
-// @route   GET /api/posts/:postId/comments
-const getPostComments = async (req, res, next) => {
-    try {
-        const post = await Post.findById(req.params.postId)
-            .populate('comments.user', 'username dp');
-
-        if (!post) {
-            res.status(404);
-            throw new Error('Post not found');
-        }
         
-        res.status(200).json(post.comments);
+        console.log('Conclusion: Comment added successfully.');
+        res.status(201).json({ success: true, comment: newComment });
 
     } catch (error) {
+        console.error("--- Backend Error in addCommentToPost ---:", error);
         next(error);
     }
 };
+
+
 
 const getPostById = async (req, res, next) => {
     try {

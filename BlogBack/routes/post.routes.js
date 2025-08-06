@@ -22,6 +22,7 @@ const upload = multer({ dest: 'uploads/' });
 router.route('/')
   .post(authenticateToken, upload.single('media'), createPost); // Use 'media' as the field name
 
+  
 router.get('/feed', authenticateToken, getFeedPosts);
 router.route('/:id').get(authenticateToken, getPostById);
 
