@@ -145,12 +145,17 @@ io.on('connection', (socket) => {
 });
 
 // 6. Core Middleware & Routes (omitted for brevity, no changes needed)
-app.use(
-  cors({
-    origin: [process.env.CLIENT_URL, "http://localhost:3000"],
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: ['https://gym-rats-a8ay.vercel.app', 'http://localhost:3000'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
 
 // const upload = multer({ dest: 'uploads/' });
 
